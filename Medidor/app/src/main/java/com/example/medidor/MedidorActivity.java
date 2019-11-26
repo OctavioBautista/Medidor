@@ -85,8 +85,6 @@ public class MedidorActivity extends AppCompatActivity {
                 }
                 cC = new ConectClient(BluetoothAdapter.getDefaultAdapter().getRemoteDevice(getIntent().getStringExtra("MAC")));
                 cC.start();
-                cambiarImagen = new CambiarImagen();
-                cambiarImagen.start();
             }
         });
     }
@@ -114,7 +112,10 @@ public class MedidorActivity extends AppCompatActivity {
                 toastSuccessfulConection.show();
                 SendReceive dataTrasnfer = new SendReceive(btSocked);
                 dataTrasnfer.start();
+                cambiarImagen = new CambiarImagen();
+                cambiarImagen.start();
             } catch (Exception e) {
+
                 Log.i("x", "Conexión Fallida");
                 toastFailedConection.show();
                 finish();
@@ -254,6 +255,11 @@ public class MedidorActivity extends AppCompatActivity {
                             }
                         }
                     }
+                }
+                try {
+                    sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }
